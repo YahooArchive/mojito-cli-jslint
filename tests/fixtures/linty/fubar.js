@@ -1,0 +1,1 @@
+../lintfree/ignored/fubar.js

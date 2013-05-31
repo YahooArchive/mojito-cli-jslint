@@ -1,0 +1,27 @@
+{
+    "lintopts": {
+        "continue": true,
+        "node": true,
+        "predef": [
+            "exports",
+            "YUI", "YUI_config", "YAHOO", "YAHOO_config", "Y",
+            "global", "process", "require", "__filename", "module",
+            "document", "navigator", "console", "self", "window"
+        ]
+    },
+    "exclude": {
+        "always": [
+            ".svn",
+            ".git",
+            "artifacts",
+            "node_modules",
+            "tests"
+        ],
+        "mojito": [
+            "docs",
+            "examples"
+        ],
+        "app": [],
+        "mojit": []
+    }
+}
