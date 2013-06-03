@@ -24,9 +24,7 @@ function main(env, cb) {
     // BC
     switch (type.toLowerCase()) {
     case 'app':
-        break;
     case 'mojit':
-        // todo: convert mojit to source path(s)
         break;
     case 'mojito':
         if (!env.mojito) {
@@ -37,7 +35,7 @@ function main(env, cb) {
         break;
 
     default:
-        // no known type provided, assume pathname
+        // no known type provided, assume pathname, generic "app" type linting
         sources.unshift(type || env.cwd);
         type = 'app';
     }

@@ -1,6 +1,6 @@
 {
   "name": "mojito-cli-jslint",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Provide the jslint command for mojito-cli",
   "main": "jslint.js",
   "dependencies": {

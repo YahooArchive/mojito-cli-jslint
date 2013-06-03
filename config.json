@@ -3,10 +3,9 @@
         "continue": true,
         "node": true,
         "predef": [
-            "exports",
-            "YUI", "YUI_config", "YAHOO", "YAHOO_config", "Y",
-            "global", "process", "require", "__filename", "module",
-            "document", "navigator", "console", "self", "window"
+            "__dirname", "__filename", "console", "document", "exports",
+            "global", "module", "navigator", "process", "require", "window",
+            "Y", "YAHOO_config", "YAHOO", "YUI_config", "YUI"
         ]
     },
     "exclude": {
