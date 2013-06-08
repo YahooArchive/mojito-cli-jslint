@@ -41,7 +41,14 @@ function main(env, cb) {
     }
 
     // add type-specific exclusions, if any
-    exclude = exclude.concat(config.exclude[type]);
+    if (config.exclude.hasOwnProperty(type)) {
+        exclude = exclude.concat(config.exclude[type]);
+    }
+
+    // assume cwd if no paths were specified
+    if (!sources.length) {
+        sources = [env.cwd];
+    }
 
     // exec
     lintifier(sources, exclude, output);
