@@ -2,6 +2,7 @@ var test = require('tap').test,
     log = require('../lib/log'),
     fn = require('../jslint');
 
+log.pause();
 
 function getEnv(args, opts) {
     return {
@@ -13,14 +14,18 @@ function getEnv(args, opts) {
 
 test('jslint (no args)', function(t) {
     var argv = [],
-        opts = {loglevel:'error'};
+        opts = {loglevel:'error'},
+        env = getEnv(argv, opts);
 
     function cb(err, msg) {
-        t.equal(msg, 'Done. No lint found in 0 js files.');
+        t.equal(err, 'Total of 7 errors found in 1 file.');
+        t.equal(msg, undefined);
     }
-    
-    t.plan(1);
-    fn(getEnv(argv, opts), cb);
+
+    t.plan(2);
+
+    env.cwd = __dirname + '/fixtures/lintfree/ignored'
+    fn(env, cb);
 });
 
 test('jslint app', function(t) {
@@ -28,10 +33,11 @@ test('jslint app', function(t) {
         opts = {};
 
     function cb(err, msg) {
+        t.equal(err, null);
         t.equal(msg, 'Done. No lint found in 0 js files.');
     }
-    
-    t.plan(1);
+
+    t.plan(2);
     fn(getEnv(argv, opts), cb);
 });
 
@@ -40,10 +46,11 @@ test('jslint mojit', function(t) {
         opts = {};
 
     function cb(err, msg) {
+        t.equal(err, null);
         t.equal(msg, 'Done. No lint found in 0 js files.');
     }
-    
-    t.plan(1);
+
+    t.plan(2);
     fn(getEnv(argv, opts), cb);
 });
 
@@ -55,10 +62,11 @@ test('jslint mojito', function(t) {
     env.mojito = {path:__dirname};
 
     function cb(err, msg) {
+        t.equal(err, null);
         t.equal(msg, 'Done. No lint found in 0 js files.');
     }
-    
-    t.plan(1);
+
+    t.plan(2);
     fn(env, cb);
 });
 
@@ -71,8 +79,9 @@ test('jslint mojito (missing mojito)', function(t) {
 
     function cb(err, msg) {
         t.equal(err, 'Mojito is not available. Please install it.');
+        t.equal(msg, undefined);
     }
-    
-    t.plan(1);
+
+    t.plan(2);
     fn(env, cb);
 });

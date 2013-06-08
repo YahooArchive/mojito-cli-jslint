@@ -35,13 +35,19 @@ function main(env, cb) {
         break;
 
     default:
-        // no known type provided, assume pathname, generic "app" type linting
+        // no known type provided, assume pathname
         sources.unshift(type || env.cwd);
-        type = 'app';
     }
 
     // add type-specific exclusions, if any
-    exclude = exclude.concat(config.exclude[type]);
+    if (config.exclude.hasOwnProperty(type)) {
+        exclude = exclude.concat(config.exclude[type]);
+    }
+
+    // assume cwd if no paths were specified
+    if (!sources.length) {
+        sources = [env.cwd];
+    }
 
     // exec
     lintifier(sources, exclude, output);
@@ -75,7 +81,7 @@ module.exports.usage = [
 ].join('\n');
 
 module.exports.options = [
-    {shortName: 'd', hasValue: true, longName: 'directory'},
-    {shortName: 'e', hasValue: [String, Array],  longName: 'exclude'},
-    {shortName: 'p', hasValue: false, longName: 'print'}
+    {shortName: 'd', longName: 'directory', hasValue: true},
+    {shortName: 'e', longName: 'exclude', hasValue: [String, Array]},
+    {shortName: 'p', longName: 'print', hasValue: false}
 ];
